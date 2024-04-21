@@ -1,0 +1,17 @@
+---
+import Layout from "../c/Layout.astro";
+import Box from "../c/Box.astro";
+import AddCard from "../c/AddCard.svelte";
+---
+
+<Layout>
+	<AddCard client:load />
+</Layout>
+
+<script>
+	if (localStorage.getItem("token")) {
+		location.href = "/login";
+	}
+</script>
+
+<style></style>

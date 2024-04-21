@@ -1,0 +1,67 @@
+---
+import "../css/reset.css";
+import "../css/fonts.css";
+import "../css/main.css";
+import SecretMenu from "./SecretMenu.svelte";
+---
+
+<html lang='en'>
+	<head>
+		<meta charset='utf-8' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='viewport' content='width=device-width' />
+		<title>Astro</title>
+	</head>
+	<body>
+		<div class='topbar'>
+			<div class='filter'></div>
+			<ul class='container menu'>
+				<li>
+					<a href='/'>Home</a>
+				</li>
+				<li>
+					<a href='/login'>Login</a>
+				</li>
+				<SecretMenu client:load />
+			</ul>
+		</div>
+		<div class='body'>
+			<slot />
+		</div>
+	</body>
+</html>
+
+<style lang='scss'>
+	.topbar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		width: 100%;
+		height: 88px;
+	}
+	.filter {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		z-index: -2;
+		background-color: rgba(0, 14, 50, 0.1);
+		backdrop-filter: blur(13px);
+	}
+	.container {
+		max-width: 960px;
+		margin: 0 auto;
+		display: flex;
+		height: 100%;
+		align-items: center;
+		font-style: normal;
+		font-weight: 600;
+	}
+	.body {
+		max-width: 960px;
+		margin: 16px auto;
+	}
+</style>

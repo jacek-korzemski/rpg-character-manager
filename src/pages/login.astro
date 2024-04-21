@@ -1,0 +1,20 @@
+---
+import Layout from "../c/Layout.astro";
+import Box from "../c/Box.astro";
+import LoginComponent from "../c/Login.svelte";
+---
+
+<Layout>
+	<Box>
+		<h1>Zaloguj się</h1>
+		<LoginComponent client:load />
+		<p>Nie masz jeszcze konta? <a href='/register'>Zarejestruj się!</a></p>
+	</Box>
+</Layout>
+
+<style>
+	h1,
+	p {
+		text-align: center;
+	}
+</style>
