@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Box from "./Box.svelte";
 
+	let isLoading: boolean = false;
+	$: btnClass = isLoading ? "btn loading" : "btn";
 	let email: string = "";
 	let password: string = "";
 	let confirm_password: string = "";
@@ -8,6 +10,7 @@
 	let error: string | undefined = undefined;
 
 	const postRegister = async () => {
+		isLoading = true;
 		const formData = new FormData();
 		formData.append("email", email);
 		formData.append("password", password);
@@ -24,9 +27,11 @@
 			})
 			.then(() => {
 				message = "Rejestracja przebiegła pomyślnie! Możesz się teraz zalogować.";
+				isLoading = false;
 			})
 			.catch((e) => {
 				error = "Podczas rejestracji wystąpił błąd. Spróbuj ponownie później.";
+				isLoading = false;
 				console.error(e);
 			});
 	};
@@ -48,12 +53,12 @@
 		<form id="register" on:submit|preventDefault={postRegister}>
 			<h1>Załóż konto</h1>
 			<label for="email"> Adres email </label>
-			<input name="email" type="text" />
+			<input name="email" type="text" disabled={isLoading} />
 			<label for="password"> Hasło </label>
-			<input name="password" type="password" />
+			<input name="password" type="password" disabled={isLoading} />
 			<label for="confirm_password"> Potwierdź hasło </label>
-			<input name="confirm_password" type="password" />
-			<button type="submit" class="btn">Zarejestruj</button>
+			<input name="confirm_password" type="password" disabled={isLoading} />
+			<button type="submit" class={btnClass}>Zarejestruj</button>
 		</form>
 	{/if}
 </Box>

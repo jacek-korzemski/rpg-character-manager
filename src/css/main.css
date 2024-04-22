@@ -91,6 +91,17 @@ select {
   background: rgb(9, 44, 85);
   box-shadow: 1px 2px 3px #222;
 }
+.btn.loading {
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(19,66,114,1) 0%, rgba(39,96,134,1) 50%, rgba(9,44,85,1) 100%);
+  background-size: 200% 100%;
+  animation: loadingAnimation 1.5s infinite linear;
+  animation-direction: alternate;
+  color: darkgray;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 1px 1px 5px black;
+  opacity: 0.75;
+}
 .error-box {
   padding: 15px;
   border: 1px solid red;
@@ -108,4 +119,13 @@ select {
   line-height: 88px;
   color: #fff;
   padding: 0 24px;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
 }

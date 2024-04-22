@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import Box from "./Box.svelte";
 
+	let isLoading: boolean = false;
+	$: btnClass = isLoading ? "btn loading" : "btn";
 	let email: string = "";
 	let password: string = "";
 	let message: string | undefined = undefined;
@@ -11,6 +12,7 @@
 	const formData = new FormData();
 
 	const postLogin = async (e: SubmitEvent) => {
+		isLoading = true;
 		e.preventDefault();
 		formData.append("email", email);
 		formData.append("password", password);
@@ -27,10 +29,12 @@
 			.then((data) => {
 				sessionStorage.setItem("token", data.token);
 				location.href = "/loginSuccess";
+				isLoading = false;
 			})
 			.catch((e) => {
 				console.error(e);
 				error = "Wystąpił błąd podczas logowania 😟";
+				isLoading = false;
 			});
 	};
 
@@ -67,10 +71,10 @@
 	{:else}
 		<form id="login" on:submit|preventDefault={postLogin}>
 			<label for="email"> Adres email </label>
-			<input name="email" type="text" bind:value={email} />
+			<input name="email" type="text" bind:value={email} disabled={isLoading} />
 			<label for="password"> Hasło </label>
-			<input name="password" type="password" bind:value={password} />
-			<button type="submit" class="btn">Login</button>
+			<input name="password" type="password" bind:value={password} disabled={isLoading} />
+			<button type="submit" class={btnClass} disabled={isLoading}>Login</button>
 		</form>
 	{/if}
 {/if}
