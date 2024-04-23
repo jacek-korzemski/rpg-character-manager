@@ -22,6 +22,9 @@
 		await fetch(`${import.meta.env.PUBLIC_API}/addCard`, {
 			method: "post",
 			body: formData,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
 		})
 			.then((res) => {
 				if (res.ok) {
@@ -50,7 +53,6 @@
 		<form on:submit|preventDefault={postCard} id="add-card-form">
 			<Box>
 				<div class="intro-data">
-					<input type="text" name="token" bind:value={token} style="display: none;" />
 					<div class="grid-item">
 						<label for="name"> Nazwa karty lub postaci </label>
 						<input name="name" id="name" type="text" />
