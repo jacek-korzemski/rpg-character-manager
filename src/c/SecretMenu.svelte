@@ -9,16 +9,16 @@
 </script>
 
 {#if render}
-	<li>
+	<!-- <li>
 		<a href="/cards">Moje Karty</a>
 	</li>
 	<li>
 		<a href="/games">Moje Gry</a>
-	</li>
+	</li> -->
 	<li>
 		<a href="/newCard">Nowa karta</a>
 	</li>
-	<li>
+	<!-- <li>
 		<a href="/newGame">Nowa gra</a>
-	</li>
+	</li> -->
 {/if}

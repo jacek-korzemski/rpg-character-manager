@@ -20,7 +20,7 @@ import SecretMenu from "./SecretMenu.svelte";
 					<a href='/'>Home</a>
 				</li>
 				<li>
-					<a href='/login'>Login</a>
+					<a href='/login' id='login-link'>Login</a>
 				</li>
 				<SecretMenu client:load />
 			</ul>
@@ -30,6 +30,20 @@ import SecretMenu from "./SecretMenu.svelte";
 		</div>
 	</body>
 </html>
+
+<script>
+	if (sessionStorage.getItem("token")) {
+		const loginLink = document?.getElementById("login-link") as HTMLLinkElement;
+		if (loginLink) {
+			loginLink.href = "/logoutSuccess";
+			loginLink.innerText = "Wyloguj";
+			loginLink.addEventListener("click", () => {
+				sessionStorage.removeItem("token");
+				location.href = location.href;
+			});
+		}
+	}
+</script>
 
 <style lang='scss'>
 	.topbar {
