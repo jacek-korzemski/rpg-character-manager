@@ -7,23 +7,28 @@ This is just the frontend part. Backend is realised in CodeIgniter 4, and will b
 
 ### Level one
 
-✔ Initial Layout in Astro / Svelte
-✔ Register / Login forms
-✔ Register / Login API communication
-✔ Add a card form (at least one system)
-✔ Add a card API communiaction
-🛠 List cards
-⚪ View single card
-⚪ PDF export (at least one system)
-⚪ Remove Card
-⚪ Edit card (mostyly API Communication)
+- ✔ Initial Layout in Astro / Svelte
+- ✔ Register / Login forms
+- ✔ Register / Login API communication
+- ✔ Add a card form (at least one system)
+- ✔ Add a card API communiaction
+- 🛠 List cards
+- ⚪ View single card
+- ⚪ PDF export (at least one system)
+- ⚪ Remove Card
+- ⚪ Edit card (mostly API Communication)
+
+### level one and a half
+
+- ⚪ Add basic suppor for at least 3 systems
+- ⚪ Audit some security, learn about it, try your best 💪
 
 ### Level two
 
-⚪ Create game room (in CI4)
-⚪ Join game room (new API with Websockets on Node - totally separate project)
-⚪ Send rolls from player card to Websocket Game Room API
-⚪ Include everything that I've forgot during making this list
+- ⚪ Create game room (in CI4)
+- ⚪ Join game room (new API with Websockets on Node - totally separate project)
+- ⚪ Send rolls from player card to Websocket Game Room API
+- ⚪ Include everything that I've forgot during making this list
 
 ## Backend - static Layer
 
