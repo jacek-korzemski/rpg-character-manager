@@ -3,14 +3,17 @@
 	import Box from "./Box.svelte";
 	import { onMount } from "svelte";
 
-	let token = "";
+	let token = undefined;
 	let mount = false;
-	let system = "shd";
+
 	let isLoading = false;
 	let error = undefined;
+
+	let system = "shd";
 	let btnClass = isLoading ? "btn loading" : "btn";
 
 	const postCard = async (e) => {
+		error = undefined;
 		isLoading = true;
 		e.preventDefault();
 		const form = document.getElementById("add-card-form");
@@ -22,8 +25,8 @@
 		})
 			.then((res) => {
 				if (res.ok) {
-					// location.href = "/addCardSuccess";
 					isLoading = false;
+					location.href = "/addCardSuccess";
 				}
 			})
 			.catch((e) => {

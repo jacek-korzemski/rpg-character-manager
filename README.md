@@ -10,9 +10,9 @@ This is just the frontend part. Backend is realised in CodeIgniter 4, and will b
 ✔ Initial Layout in Astro / Svelte
 ✔ Register / Login forms
 ✔ Register / Login API communication
-🛠 Add a card form (at least one system)
-⚪ Add a card API communiaction
-⚪ List cards
+✔ Add a card form (at least one system)
+✔ Add a card API communiaction
+🛠 List cards
 ⚪ View single card
 ⚪ PDF export (at least one system)
 ⚪ Remove Card
