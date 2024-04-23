@@ -11,6 +11,7 @@ body {
   background: linear-gradient(153deg, rgba(2,21,62,1) 0%, rgba(16,90,134,1) 100%);
   background-size: cover;
   padding-top: 88px;
+  padding-bottom:64px;
 }
 
 .btn {
@@ -57,7 +58,8 @@ form {
 }
 input[type="text"],
 input[type="password"],
-input[type="number"] {
+input[type="number"], 
+textarea {
   width: 100%;
   max-width: 300px;
   height: 48px;
@@ -72,6 +74,11 @@ input[type="number"] {
   border: 1px solid #ccc;
   box-shadow: 1px 2px 3px #000;
   margin-bottom: 15px;
+}
+textarea {
+  min-height: 128px;
+  width: 100%;
+  max-width: none;
 }
 select {
   width: 100%;
@@ -128,4 +135,13 @@ select {
   100% {
     background-position: 0 50%;
   }
+}
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  accent-color: rgb(39,96,134);
+  display: block;
+  border: 1px solid black;
 }
