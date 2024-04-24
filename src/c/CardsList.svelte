@@ -46,7 +46,7 @@
 					<td>{index + 1}</td>
 					<td>{card.name}</td>
 					<td>{card.description}</td>
-					<td><a href={`/editCard/${card.id}`}>📝</a></td>
+					<td><a href={`/editCard/#${card.id}`}>📝</a></td>
 				</tr>
 			{/each}
 		</table>
