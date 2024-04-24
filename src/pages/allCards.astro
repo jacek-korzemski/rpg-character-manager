@@ -1,0 +1,13 @@
+---
+import Box from "../c/Box.astro";
+import CardsList from "../c/CardsList.svelte";
+import Layout from "../c/Layout.astro";
+---
+
+<Layout>
+	<Box>
+		<h1>Twoje karty postaci</h1>
+		<p>Poniżej znajduje się tabela zawierające utworzone przez Ciebie karty postaci.</p>
+		<CardsList client:load />
+	</Box>
+</Layout>

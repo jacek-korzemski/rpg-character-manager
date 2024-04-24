@@ -9,10 +9,10 @@
 </script>
 
 {#if render}
-	<!-- <li>
-		<a href="/cards">Moje Karty</a>
-	</li>
 	<li>
+		<a href="/allCards">Moje Karty</a>
+	</li>
+	<!-- <li>
 		<a href="/games">Moje Gry</a>
 	</li> -->
 	<li>

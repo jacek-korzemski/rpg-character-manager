@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from "svelte";
-	import Box from "./Box.svelte";
 
 	let mount = false;
 	let token = "";
@@ -18,30 +17,66 @@
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
-		});
+		})
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				}
+			})
+			.then((data) => {
+				cardsArray = [...data];
+			})
+			.catch((e) => {
+				console.error(e);
+			});
 	}
 </script>
 
 {#if mount}
-	<Box>
-		<h1>Lista Twoich kart postaci</h1>
-		{#if cardsArray.length > 0}
-			<table>
+	{#if cardsArray.length > 0}
+		<table>
+			<tr>
+				<td> Lp. </td>
+				<td> Nazwa karty </td>
+				<td> Opis </td>
+				<td> Akcje </td>
+			</tr>
+			{#each cardsArray as card, index}
 				<tr>
-					<td> Lp. </td>
-					<td> Nazwa karty </td>
-					<td> Opis </td>
-					<td> Akcje </td>
+					<td>{index + 1}</td>
+					<td>{card.name}</td>
+					<td>{card.description}</td>
+					<td><a href={`/editCard/${card.id}`}>📝</a></td>
 				</tr>
-				{#each cardsArray as [name, description, id], index}
-					<tr>
-						<td>{index}</td>
-						<td>{name}</td>
-						<td>{description}</td>
-						<td><button on:click={() => alert(id)}>test</button></td>
-					</tr>
-				{/each}
-			</table>
-		{/if}
-	</Box>
+			{/each}
+		</table>
+	{/if}
 {/if}
+
+<style>
+	table {
+		width: calc(100% - 5px);
+		border-collapse: collapse;
+		margin-top: 15px;
+	}
+
+	tr {
+		border-bottom: 1px solid #ccc;
+	}
+	td {
+		border-right: 1px solid #ccc;
+		padding: 8px;
+	}
+	td:first-child {
+		border-left: 1px solid #ccc;
+	}
+
+	tr:first-child {
+		background-color: darkblue;
+		font-weight: bold;
+		border-top: 1px solid #ccc;
+	}
+	a:hover {
+		border-bottom: transparent;
+	}
+</style>
