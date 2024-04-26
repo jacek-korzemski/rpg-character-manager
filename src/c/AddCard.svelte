@@ -3,7 +3,6 @@
 	import Box from "./Box.svelte";
 	import { onMount } from "svelte";
 
-	export const lock = false;
 	export let data = undefined;
 
 	let token = undefined;
@@ -61,8 +60,19 @@
 						<input name="name" id="name" type="text" value={data?.name || ""} />
 					</div>
 					<div class="grid-item">
-						<label for="system"> System </label>
-						<select name="system" bind:value={system} disabled={lock}>
+						<label for="system">
+							System
+							{#if $$props.lock}
+								<small
+									class="i"
+									data-text="Możliwość zmiany systemu jest niemożliwa, 
+									ze względu na różnorodność pól. 
+									Aby zmienić system, proszę 
+									uwtórz nową kartę postaci.">❔</small
+								>
+							{/if}
+						</label>
+						<select name="system" bind:value={system} disabled={$$props.lock}>
 							<option value="dnd">Dungeons and Dragons 5e</option>
 							<option value="bf">Basic Fantasy 3e</option>
 							<option value="shd">Shadowdark</option>
@@ -121,5 +131,30 @@
 			background: rgba(0, 0, 0, 0.5);
 			border-radius: 20px;
 		}
+	}
+
+	/* tooltip */
+	.i {
+		cursor: pointer;
+		position: relative;
+	}
+	.i:before {
+		content: attr(data-text);
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 100%;
+		margin-left: 15px;
+		width: 200px;
+		padding: 10px;
+		border-radius: 10px;
+		background: #000;
+		color: #fff;
+		text-align: center;
+		display: none;
+		z-index: 9999;
+	}
+	.i:hover:before {
+		display: block;
 	}
 </style>

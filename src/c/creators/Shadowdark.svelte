@@ -1,10 +1,10 @@
 <script>
-	import { onMount } from "svelte";
 	import Heart from "../img/heart.png";
 	import Shield from "../img/shield.png";
 	import Circle from "../img/circle.png";
+	import { onMount } from "svelte";
 
-	export let content = undefined;
+	export let content;
 
 	$: hasSpells = content?.has_spells === "on" ? true : false;
 
@@ -12,12 +12,12 @@
 		return Math.floor((num - 10) / 2);
 	};
 
-	let str = content?.str ? content.str : 10;
-	let dex = content?.dex ? content.dex : 10;
-	let con = content?.con ? content.con : 10;
-	let int = content?.int ? content.int : 10;
-	let wis = content?.wis ? content.wis : 10;
-	let cha = content?.cha ? content.cha : 10;
+	$: str = content?.str || 10;
+	$: dex = content?.dex || 10;
+	$: con = content?.con || 10;
+	$: int = content?.int || 10;
+	$: wis = content?.wis || 10;
+	$: cha = content?.cha || 10;
 
 	const roll = () => {
 		str = statRoll();
@@ -37,10 +37,6 @@
 		const maxFloored = Math.floor(max + 1); // The maximum is exclusive and the minimum is inclusive
 		return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 	}
-
-	onMount(() => {
-		console.log(content);
-	});
 </script>
 
 <div class="grid">
