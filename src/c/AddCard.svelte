@@ -3,13 +3,16 @@
 	import Box from "./Box.svelte";
 	import { onMount } from "svelte";
 
+	export const lock = false;
+	export let data = undefined;
+
 	let token = undefined;
 	let mount = false;
 
 	let isLoading = false;
 	let error = undefined;
 
-	let system = "shd";
+	let system = data?.system ? data.system : "shd";
 	let btnClass = isLoading ? "btn loading" : "btn";
 
 	const postCard = async (e) => {
@@ -55,11 +58,11 @@
 				<div class="intro-data">
 					<div class="grid-item">
 						<label for="name"> Nazwa karty lub postaci </label>
-						<input name="name" id="name" type="text" />
+						<input name="name" id="name" type="text" value={data?.name || ""} />
 					</div>
 					<div class="grid-item">
 						<label for="system"> System </label>
-						<select name="system" bind:value={system}>
+						<select name="system" bind:value={system} disabled={lock}>
 							<option value="dnd">Dungeons and Dragons 5e</option>
 							<option value="bf">Basic Fantasy 3e</option>
 							<option value="shd">Shadowdark</option>
@@ -67,14 +70,14 @@
 					</div>
 					<div class="grid-item span-2">
 						<label for="description"> Opis karty postaci </label>
-						<input name="description" id="description" type="text" />
+						<input name="description" id="description" type="text" value={data?.description || ""} />
 					</div>
 				</div>
 			</Box>
 			{#if system === "shd"}
 				<h1>Wybrany system: Shadowdark</h1>
 				<Box>
-					<Shadowdark />
+					<Shadowdark content={data?.content && JSON.parse(data?.content)} />
 				</Box>
 			{/if}
 			<div class="spacer"></div>

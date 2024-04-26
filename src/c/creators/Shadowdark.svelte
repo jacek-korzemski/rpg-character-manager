@@ -1,20 +1,23 @@
 <script>
+	import { onMount } from "svelte";
 	import Heart from "../img/heart.png";
 	import Shield from "../img/shield.png";
 	import Circle from "../img/circle.png";
 
-	$: hasSpells = false;
+	export let content = undefined;
+
+	$: hasSpells = content?.has_spells === "on" ? true : false;
 
 	const modCount = (num) => {
 		return Math.floor((num - 10) / 2);
 	};
 
-	let str = 10;
-	let dex = 10;
-	let con = 10;
-	let int = 10;
-	let wis = 10;
-	let cha = 10;
+	let str = content?.str ? content.str : 10;
+	let dex = content?.dex ? content.dex : 10;
+	let con = content?.con ? content.con : 10;
+	let int = content?.int ? content.int : 10;
+	let wis = content?.wis ? content.wis : 10;
+	let cha = content?.cha ? content.cha : 10;
 
 	const roll = () => {
 		str = statRoll();
@@ -34,41 +37,45 @@
 		const maxFloored = Math.floor(max + 1); // The maximum is exclusive and the minimum is inclusive
 		return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 	}
+
+	onMount(() => {
+		console.log(content);
+	});
 </script>
 
 <div class="grid">
 	<div class="grid-item">
 		<label for="character_name">Character Name</label>
-		<input name="character_name" type="text" />
+		<input name="character_name" type="text" value={content?.character_name || ""} />
 	</div>
 	<div class="grid-item">
 		<label for="ancestry">Ancestry</label>
-		<input name="ancestry" type="text" />
+		<input name="ancestry" type="text" value={content?.ancestry || ""} />
 	</div>
 	<div class="grid-item">
 		<label for="class">Class</label>
-		<input name="class" type="text" />
+		<input name="class" type="text" value={content?.class || ""} />
 	</div>
 	<div class="grid-item">
 		<label for="background">Background</label>
-		<input name="background" type="text" />
+		<input name="background" type="text" value={content?.background || ""} />
 	</div>
 </div>
 <div class="grid grid-3">
 	<div class="grid-item star-center">
 		<label for="level">Level</label>
 		<img src={Circle.src} alt="heart" />
-		<input name="level" type="number" min="0" max="10" />
+		<input name="level" type="number" min="0" max="10" value={content?.level || ""} />
 	</div>
 	<div class="grid-item heart-center">
 		<label for="hp">Hit Points</label>
 		<img src={Heart.src} alt="heart" />
-		<input type="number" name="hp" />
+		<input type="number" name="hp" value={content?.hp || ""} />
 	</div>
 	<div class="grid-item shield-center">
 		<label for="ac">Armor Class</label>
 		<img src={Shield.src} alt="shield" />
-		<input type="number" name="ac" />
+		<input type="number" name="ac" value={content?.ac || ""} />
 	</div>
 </div>
 <hr />
@@ -104,23 +111,35 @@
 <div class="grid grid-1">
 	<div class="grid-item">
 		<label for="ancestry-talent">Ancestry talent:</label>
-		<input type="text" name="ancestry-talent" />
+		<input type="text" name="ancestry-talent" value={content?.["ancestry-talent"] || ""} />
 	</div>
 </div>
 <div class="grid grid-1">
 	<div class="grid-item">
 		<label for="class_feats">Class Features and talents</label>
-		<textarea name="class_feats"></textarea>
+		{#if content?.class_feats}
+			<textarea name="class_feats">{content.class_feats}</textarea>
+		{:else}
+			<textarea name="class_feats"></textarea>
+		{/if}
 	</div>
 </div>
 <div class="grid grid-2">
 	<div class="grid-item">
 		<label for="gear">Gear</label>
-		<textarea name="gear"></textarea>
+		{#if content?.gear}
+			<textarea name="gear">{content.gear}</textarea>
+		{:else}
+			<textarea name="gear"></textarea>
+		{/if}
 	</div>
 	<div class="grid-item">
 		<label for="notes">Notes</label>
-		<textarea name="notes"></textarea>
+		{#if content?.notes}
+			<textarea name="notes">{content.notes}</textarea>
+		{:else}
+			<textarea name="notes"></textarea>
+		{/if}
 	</div>
 </div>
 <div class="grid grid-1">
@@ -131,7 +150,11 @@
 	{#if hasSpells}
 		<div class="grid-item">
 			<label for="spells">Spells list</label>
-			<textarea name="spells"></textarea>
+			{#if content?.spells}
+				<textarea name="spells">{content.spells}</textarea>
+			{:else}
+				<textarea name="spells"></textarea>
+			{/if}
 		</div>
 	{/if}
 </div>

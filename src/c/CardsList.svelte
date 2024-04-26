@@ -50,7 +50,11 @@
 				</tr>
 			{/each}
 		</table>
+	{:else}
+		<p>Wczytywanie...</p>
 	{/if}
+{:else}
+	<p>Wczytywanie...</p>
 {/if}
 
 <style>
