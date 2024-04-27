@@ -4,6 +4,7 @@
 	let mount = false;
 	let token = "";
 	let cardsArray = [];
+	let isEmpty = false;
 
 	onMount(() => {
 		mount = true;
@@ -25,6 +26,9 @@
 			})
 			.then((data) => {
 				cardsArray = [...data].sort((a, b) => b.id - a.id);
+				if (cardsArray.length === 0) {
+					isEmpty = true;
+				}
 			})
 			.catch((e) => {
 				console.error(e);
@@ -50,8 +54,8 @@
 				</tr>
 			{/each}
 		</table>
-	{:else}
-		<p>Wczytywanie...</p>
+	{:else if isEmpty}
+		<p>Jeszcze nie masz żadnych kart. <a href="/newCard">Utwórz</a> swoją pierwszą kartę!</p>
 	{/if}
 {:else}
 	<p>Wczytywanie...</p>

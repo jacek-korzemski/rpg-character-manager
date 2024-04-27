@@ -11,3 +11,9 @@ import Layout from "../c/Layout.astro";
 		<CardsList client:load />
 	</Box>
 </Layout>
+
+<script>
+	if (localStorage.getItem("token")) {
+		location.href = "/login";
+	}
+</script>

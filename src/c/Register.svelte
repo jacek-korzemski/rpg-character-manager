@@ -3,18 +3,13 @@
 
 	let isLoading: boolean = false;
 	$: btnClass = isLoading ? "btn loading" : "btn";
-	let email: string = "";
-	let password: string = "";
-	let confirm_password: string = "";
 	let message: string | undefined = undefined;
 	let error: string | undefined = undefined;
 
 	const postRegister = async () => {
 		isLoading = true;
-		const formData = new FormData();
-		formData.append("email", email);
-		formData.append("password", password);
-		formData.append("confirm_password", confirm_password);
+		const form = document.getElementById("register");
+		const formData = new FormData(form as HTMLFormElement);
 
 		await fetch(`${import.meta.env.PUBLIC_API}/register`, {
 			method: "POST",

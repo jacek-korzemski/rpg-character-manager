@@ -6,3 +6,9 @@ import Layout from "../c/Layout.astro";
 <Layout>
 	<Edit client:load />
 </Layout>
+
+<script>
+	if (localStorage.getItem("token")) {
+		location.href = "/login";
+	}
+</script>

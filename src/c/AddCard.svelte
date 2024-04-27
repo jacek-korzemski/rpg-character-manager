@@ -6,7 +6,7 @@
 
 	export let data = undefined;
 
-	$: system = $$props.system || "";
+	$: system = "none";
 
 	let token = undefined;
 	let mount = false;
@@ -46,6 +46,9 @@
 	onMount(() => {
 		mount = true;
 		token = sessionStorage.getItem("token");
+		if ($$props.system) {
+			system = $$props.system;
+		}
 	});
 </script>
 
@@ -74,7 +77,8 @@
 								>
 							{/if}
 						</label>
-						<select name="system" value={system} disabled={$$props.lock}>
+						<select name="system" bind:value={system} disabled={$$props.lock}>
+							<option value="none">None (just a note)</option>
 							<option value="bf">Basic Fantasy 3e</option>
 							<option value="shd">Shadowdark</option>
 						</select>
