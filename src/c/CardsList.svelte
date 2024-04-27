@@ -24,7 +24,7 @@
 				}
 			})
 			.then((data) => {
-				cardsArray = [...data];
+				cardsArray = [...data].sort((a, b) => b.id - a.id);
 			})
 			.catch((e) => {
 				console.error(e);

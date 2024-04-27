@@ -2,8 +2,11 @@
 	import Shadowdark from "./creators/Shadowdark.svelte";
 	import Box from "./Box.svelte";
 	import { onMount } from "svelte";
+	import BasicFantasy from "./creators/BasicFantasy.svelte";
 
 	export let data = undefined;
+
+	$: system = $$props.system || "";
 
 	let token = undefined;
 	let mount = false;
@@ -11,7 +14,6 @@
 	let isLoading = false;
 	let error = undefined;
 
-	let system = data?.system ? data.system : "shd";
 	let btnClass = isLoading ? "btn loading" : "btn";
 
 	const postCard = async (e) => {
@@ -72,8 +74,7 @@
 								>
 							{/if}
 						</label>
-						<select name="system" bind:value={system} disabled={$$props.lock}>
-							<option value="dnd">Dungeons and Dragons 5e</option>
+						<select name="system" value={system} disabled={$$props.lock}>
 							<option value="bf">Basic Fantasy 3e</option>
 							<option value="shd">Shadowdark</option>
 						</select>
@@ -88,6 +89,11 @@
 				<h1>Wybrany system: Shadowdark</h1>
 				<Box>
 					<Shadowdark content={data?.content && JSON.parse(data?.content)} />
+				</Box>
+			{:else if system === "bf"}
+				<h1>Wybrany system: Basic Fantasy</h1>
+				<Box>
+					<BasicFantasy content={data?.content && JSON.parse(data?.content)} />
 				</Box>
 			{/if}
 			<div class="spacer"></div>

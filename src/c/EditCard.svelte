@@ -5,6 +5,7 @@
 	let id;
 	let data;
 	let token;
+	let system;
 	let mount = false;
 
 	onMount(() => {
@@ -32,7 +33,7 @@
 			})
 			.then((res) => {
 				data = res;
-				console.log(data);
+				system = JSON.parse(res.content).system;
 			})
 			.catch((e) => {
 				console.error(e);
@@ -40,6 +41,6 @@
 	}
 </script>
 
-{#if mount}
-	<AddCard {data} lock={true} />
+{#if mount && data}
+	<AddCard {data} lock={true} {system} />
 {/if}
