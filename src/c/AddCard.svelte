@@ -3,6 +3,7 @@
 	import Box from "./Box.svelte";
 	import { onMount } from "svelte";
 	import BasicFantasy from "./creators/BasicFantasy.svelte";
+	import Note from "./creators/Note.svelte";
 
 	export let data = undefined;
 
@@ -98,6 +99,11 @@
 				<h1>Wybrany system: Basic Fantasy</h1>
 				<Box>
 					<BasicFantasy content={data?.content && JSON.parse(data?.content)} />
+				</Box>
+			{:else if system === "none"}
+				<h1>Zwykła notatka</h1>
+				<Box>
+					<Note content={data?.content && JSON.parse(data?.content)} />
 				</Box>
 			{/if}
 			<div class="spacer"></div>
