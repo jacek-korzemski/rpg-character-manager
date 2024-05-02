@@ -23,8 +23,20 @@
 		e.preventDefault();
 		const form = document.getElementById("add-card-form");
 		const formData = new FormData(form);
+		if ($$props.lock && data?.user_id) {
+			formData.append("user_id", data.user_id);
+			formData.append("id", data.id);
+			formData.append("system", $$props.system);
+		}
 
-		await fetch(`${import.meta.env.PUBLIC_API}/addCard`, {
+		const apiMethod = $$props.lock ? "putCard" : "addCard";
+
+		await fetch(`${import.meta.env.PUBLIC_API}/${apiMethod}`, {
+			// Yeah, I would love to use PUT method
+			// to update cards, but Codeigniter4 has
+			// some strange way of reading data from
+			// put request. I won't to keep it simple
+			// even if it's not as God said.
 			method: "post",
 			body: formData,
 			headers: {
@@ -34,7 +46,7 @@
 			.then((res) => {
 				if (res.ok) {
 					isLoading = false;
-					location.href = "/addCardSuccess";
+					location.href = $$props.lock ? "/editCardSuccess" : "/addCardSuccess";
 				}
 			})
 			.catch((e) => {

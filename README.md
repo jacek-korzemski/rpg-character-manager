@@ -13,11 +13,9 @@ This is just the frontend part. Backend is realised in CodeIgniter 4, and will b
 - ✔ Add a card form (at least one system)
 - ✔ Add a card API communiaction
 - ✔ List cards
-- ⚪ View single card
-- 🛠 Remove Card
 - ✔ Edit card (frontend component)
-- ⚪ Edit card (api Communication to update)
-- ⚪ PDF export (at least one system)
+- ✔ Edit card (api Communication to update)
+- 🛠 Remove Card
 
 ### level one and a half
 
